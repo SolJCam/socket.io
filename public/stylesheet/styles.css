@@ -1,0 +1,21 @@
+button {
+	height: 32px;
+	width: 9%;
+	position: relative;
+	top: 660px;
+	background-color: #6495ED;
+	border-color: #000000;
+}
+
+ul {
+	padding: 0px;
+}
+
+#chat {
+	width: 90%;
+	height: 26px;
+	border-color: #000000;
+	position: relative;
+	top: 660px;
+}
+
