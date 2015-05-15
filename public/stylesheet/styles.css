@@ -1,8 +1,12 @@
+html {
+	overflow-y: hidden;
+	font-family: 'Source Code Pro';
+}
+
 button {
-	height: 32px;
-	width: 9%;
+	height: 51px;
+	width: 122px;
 	position: relative;
-	top: 660px;
 	background-color: #6495ED;
 	border-color: #000000;
 }
@@ -11,11 +15,28 @@ ul {
 	padding: 0px;
 }
 
-#chat {
-	width: 90%;
-	height: 26px;
-	border-color: #000000;
-	position: relative;
-	top: 660px;
+li {
+	word-wrap: break-word;
+	font-family: 'Source Code Pro'
 }
 
+h2, h3 {
+	font-family: 'Source Code Pro';
+	text-align: center;
+}
+
+#chat {
+	width: 460px;
+	height: 51px;
+	border-color: #000000;
+	position: relative;
+}
+
+#mine {
+	background-color:white;
+	height:300px;
+	width: 582px;
+	border:2px solid;
+	border-color:#000000;
+	overflow-y: scroll;
+}

@@ -1,18 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html class="light-blue lighten-3">
 <head>
 	<title>socket.io</title>
 	<link rel="stylesheet" type="text/css" href="stylesheet/styles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="scripts/scripts.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
 </head>
 <body>
-	<!-- <h1>Hey what the f#@*!<h1> -->
-	<ul id="messages">
-	<form action="">
-	<input id="chat" autocomplete="off" /><button>Send</button>	
-	</form>
-	</ul>
+	<div class="container">
+		<div class="row">
+			<div class="col s12">
+				<h1>Welcome To Sol's Chatroom!!</h1>
+				<h3>Feel free to join the conversation!<h3>
+			</div>
+			<div class="col s8 offset-s2" style="padding:0px">
+				<div id="mine">
+					<ul id="messages">
+					</ul>
+				</div>
+				<form action="">
+					<input id="chat" autocomplete="off" /><button>Send</button>	
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
