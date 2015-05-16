@@ -4,7 +4,7 @@ $(document).ready(function(){
 	$('#modal1').openModal();
 
 	$('a').on('click', function(){
-		username = $('<p>').append($('input[type=text]').val()).css("color", "red")
+		// username = $('<p>').append($('input[type=text]').val()).css("color", "red")
 		name = $('input[type=text]').val()
 
 		var socket = io();
