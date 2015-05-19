@@ -16,12 +16,18 @@ ul {
 
 li {
 	word-wrap: break-word;
-	font-family: 'Source Code Pro'
+	font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
-h2, h3 {
-	font-family: 'Source Code Pro';
+h1, h2, h3, h4 {
+	font-family: "Comic Sans MS", cursive, sans-serif;
 	text-align: center;
+}
+
+img {
+	height: 40px;
+	width: 35px,;
+	float: left;
 }
 
 #chat {
