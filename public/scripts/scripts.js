@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	console.log("scripts are being read")
-	
+
 	$('#modal1').openModal({
 		dismissible: false,
 		ready: function(){
@@ -10,7 +10,6 @@ $(document).ready(function(){
 				      		e.preventDefault();
 				      		$('#test').append('<p style="color: red; font-family: Source Code Pro">Please provide a username then continue');
 				    	} else {
-
 							img1 = $('input[type=url]').val();
 					// Accessing file objects representing the files selected by the user : https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications
 							img = $('input[type=file]')[0].files[0]
@@ -25,7 +24,7 @@ $(document).ready(function(){
 								imgEle.src = reader.result;
 								ok = imgEle.src
 							}
-						// Not entirely sure what's happening here: 
+						// Not entirely sure what's happening here :S 
 							if (img){
 								ok = reader.readAsDataURL(img);
 							} else {
@@ -49,10 +48,7 @@ $(document).ready(function(){
 									$('#messages').append($('<li>').text(msg));
 									$('#mine').scrollTop($('#messages').height());
 							});
-
-
-				    		$('#modal1').closeModal();
-							
+				    		$('#modal1').closeModal();							
 				    	}
 				});
 		}
