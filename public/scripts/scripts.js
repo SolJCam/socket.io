@@ -23,13 +23,13 @@ $(document).ready(function(){
 					// onloadend Event handler that returns file data in the form of a URL
 							reader.onloadend = function () {
 								imgEle.src = reader.result;
-								ok = imgEle.src;
+								ok = imgEle.src
 							}
 						// Not entirely sure what's happening here: 
 							if (img){
 								ok = reader.readAsDataURL(img);
 							} else {
-								imgEle.src = "";
+								imgEle.src = ""
 							}
 
 							var socket = io();
