@@ -20,8 +20,4 @@ io.on('connection', function(socket){
 	})
 });
 
-var port = 3000;
-
-http.listen(3000, function() {
-	console.log("App listening on port 3000")
-});
+http.listen(process.env.PORT || 3000);
