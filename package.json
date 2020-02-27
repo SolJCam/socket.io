@@ -1,15 +1,16 @@
 {
-"name": "socekt.io",
-"version": "0.0.1",
-"engines": {
-	"node": "0.12.4",
-	"npm": "2.10.1"
-},
-"dependencies": {
-	"express": "~4.12.3",
-	"socket.io": "~1.3.5",
-	"fs": "~0.0.2"
-}, "scripts": {
-  "start": "node socket.js"
-}
+	"name": "socekt.io",
+	"version": "0.0.1",
+	"engines": {
+		"node": "0.12.4",
+		"npm": "2.10.1"
+	},
+	"dependencies": {
+		"express": "^4.17.1",
+		"fs": "~0.0.2",
+		"socket.io": "^2.3.0"
+	},
+	"scripts": {
+		"start": "node socket.js"
+	}
 }
