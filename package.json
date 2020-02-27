@@ -2,8 +2,8 @@
 	"name": "socekt.io",
 	"version": "0.0.1",
 	"engines": {
-		"node": "0.12.4",
-		"npm": "2.10.1"
+		"node": "13.2.0",
+		"npm": "6.13.1"
 	},
 	"dependencies": {
 		"express": "^4.17.1",
