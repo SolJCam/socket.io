@@ -8,7 +8,7 @@
 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
-	<script src="scripts/scripts2.js"></script>
+	<script src="scripts/scripts.js"></script>
 	<!-- <script src="scripts/scripts.js"></script> -->
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
 </head>
@@ -27,9 +27,6 @@
 				<form action="">
 					<input id="chat" autocomplete="off" /><button id="send">Send</button>	
 				</form>
-				<!-- <div id="send_msg" action="">
-					<input id="chat" autocomplete="off" /><button id="send">Send</button>	
-				</div> -->
 			</div>
 		</div>
 	</div>
@@ -38,12 +35,12 @@
 			<h5>Please provide the following:</h5>
 			<br>
 			<form id="usr_info" method="" action="">
-					<h6>Username: </h6>
+					<h5 style="color:teal">Username: </h5>
 					<p id="error" display="none"></p>
-					<input name="username" type="text" />
-					<h6>Avatar: </h6>
-					<p>Provide an image url</p> <input name="img1" type="url" />
-					<p>Or upload an image from your hardrive</p> <input name="img" type="file" />
+					<input name="username" type="text"/>
+					<h5 style="color:teal">Avatar: </h5>
+					<p>Provide an image url from the web</p> <input name="img1" type="url"/>
+					<p>Or upload an image from your hardrive (Only you will be able to see this image)</p> <input name="img" type="file" accept="image/*"/>
 			</form>
 		</div>
 		<div class="modal-footer">

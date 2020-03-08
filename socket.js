@@ -12,31 +12,28 @@ app.get('/', function (req, res) {
 	});
 });
 
-
-// io.on('connection', function(socket){
-// 	socket.on('sending chat message', function(msg){
-// 		io.emit('chat message', msg);
-// 		console.log('message: '+ msg);
-
-// 	})
-// });
-
 const users = {}
 
 io.on('connection', function (socket) {
-	// socket.emit('server message', msg);
 	socket.on('joining chat', member => {
 		users[socket.id] = member;
 		console.log(users);
 		socket.broadcast.emit('connnected to chat', member)
 	})
 
-	socket.on('sending chat message', function (msg) {
+	socket.on('sent chat message', function (msg) {
 		const member = users[socket.id]
 		console.log(member);
-		io.emit('chat message', [member, msg])
+		socket.broadcast.emit('send my chat message', [member, msg])
+		socket.emit('display my chat message', [member, msg])
+		// io.emit('post chat message', [member, msg])
 	});
-});
 
+	socket.on('disconnect', () => {
+		socket.broadcast.emit('user-disconnected', users[socket.id]);
+		delete users[socket.id];
+		console.log(users);
+	})
+});
 
 server.listen(process.env.PORT || 3000);

@@ -2,19 +2,16 @@ $(document).ready(function(){
 	
 	console.log("scripts are being read")
 
-	const socket = io();
-
-	var extImg;
-	var lclImg = ""
-	var imgFile;
-	let member = {}
+	window.socket = io();
+	
+	window.lclImg = ""
+	window.member = {}
 	
 	$('#modal1').openModal({
 		dismissible: false,
 		ready: function(){
 			$('#agree').on('click', function(e){
 				const name = $('input[type=text]').val();
-				// name = name_val+'('+ip+')'
 
 				if (name.length == 0){
 					
@@ -23,11 +20,11 @@ $(document).ready(function(){
 
 				} else {
 					// Catching, if passed, the external url value for user image
-					extImg = $('input[type=url]').val();
+					const extImg = $('input[type=url]').val();
 								
 					// Accessing, if provided, local file objects representing the image files selected by the user : https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications
-					imgFile = $('input[type=file]')[0].files[0];
-
+					const imgFile = $('input[type=file]')[0].files[0];
+					
 					// creating url for local images
 					if(imgFile){
 						reader = new FileReader();
@@ -39,27 +36,28 @@ $(document).ready(function(){
 						lclImg = reader.readAsDataURL(imgFile);	
 					};
 					
-					// if (lclImg) {
-					// 	member = {
-					// 		"name": name,
-					// 		"pic": "",
-					// 		"pic_id": socket.id)
-					// 	}
-					// } else if (extImg) {
-					// 	member = {
-					// 		"name": name,
-					// 		"pic": extImg
-					// 	}					
-					// } else {
-					// 	member = {
-					// 		"name": name,
-					// 		"pic": ""
-					// 	}
-					// }
-
-					// socket.emit('joining chat', member);
+					if (imgFile) {
+						sessionStorage.setItem('id', socket.id);
+						member = {
+							"name": name,
+							"pic": socket.id
+						}
+					} else if (extImg) {
+						member = {
+							"name": name,
+							"pic": extImg
+						}					
+					} else {
+						member = {
+							"name": name,
+							"pic": null
+						}
+					}
+					
+					socket.emit('joining chat', member);
 
 					$('#messages').append($('<li>').text(`You joined the chat`));
+					
 
 					$('#modal1').closeModal();
 				}
@@ -67,34 +65,18 @@ $(document).ready(function(){
 		}		
 	});
 	
-	if (lclImg) {
-		member = {
-			"name": name,
-			"pic": "",
-			"pic_id": socket.id
-		}
-	} else if (extImg) {
-		member = {
-			"name": name,
-			"pic": extImg
-		}					
-	} else {
-		member = {
-			"name": name,
-			"pic": ""
-		}
-	}
-
-	socket.emit('joining chat', member);
-	
 	function appendMessage(userMsg) {
+		const name = userMsg[0]["name"];	
+		const msg = userMsg[1];
 		const pic = userMsg[0]["pic"]
-		const name = userMsg[0]["name"]	
-		const msg = userMsg[1]	
-		if (pic.length > 0) {
-			$('#messages').append($('<li>').append($('<img>').attr('src', pic)).append(name).css("color", "red"));
+		const picId = sessionStorage.getItem('id')
+			
+		if (pic != picId) {
+			$('#messages').append($('<li>').append($('<img>').attr({'src': pic, 'width': 50, 'height': 20})).append(name).css("color", "red"));
+		} else if (pic == picId) {
+			$('#messages').append($('<li>').append($('<img>').attr({'src': lclImg, 'id': picId, 'width': 50, 'height': 20})).append(name).css("color", "red"));
 		} else {
-			$('#messages').append($('<li>').append($('<img>').attr('src', 'imgs/noPic.jpg')).append(name).css("color", "red"));
+			$('#messages').append($('<li>').append($('<img>').attr({'src': '/noPic.jpg', 'width': 50, 'height': 20})).append(name).css("color", "red"));
 		}
 		$('#messages').append($('<li>').text(msg));
 		$('#mine').scrollTop($('#messages').height());
@@ -105,17 +87,23 @@ $(document).ready(function(){
 		$('#messages').append($('<li>').text(`${member["name"]} joined the chat`));
 	});
 
-
 	$("#send").click(function(){
 		msg = $('#chat').val();
-		socket.emit('sending chat message', msg);
+		socket.emit('sent chat message', msg);
+		$('#chat').val('');
 	});
 
-	
-	socket.on('chat message', userMsg => {
+	socket.on('send my chat message', userMsg => {
 		appendMessage(userMsg);
 	});
 
+	socket.on('display my chat message', userMsg => {
+		appendMessage(userMsg);
+	});
+
+	socket.on('user-disconnected', member => {
+		$('#messages').append($('<li>').text(`${member["name"]} left the chat`));
+	});
 
 });
 

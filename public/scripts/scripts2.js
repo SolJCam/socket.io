@@ -1,19 +1,37 @@
 $(document).ready(function(){
 	console.log("scripts are being read")
 
-	let extImg
-	let lclImg;
-	let imgFile;
-	let name;
+	window.extImg = ""
+	window.lclImg = ""
+	window.imgFile = ""
+	window.name = ""
+
 
 	$('#modal1').openModal({
 		dismissible: false,
 		ready: function(){
+			// name = $('input[type=text]').val();
+			
+			// extImg = $('input[type=url]').val();
+								
+			// // Accessing, if provided, local file objects representing the image files selected by the user : https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications
+			// imgFile = $('input[type=file]')[0].files[0];
+			// debugger
+			// // creating url for local images
+			// if(imgFile){
+			// 	reader = new FileReader();
+			// 	reader.onloadend = function () {
+			// 		// Necessary for function to follow though not clear why
+			// 		lclImg = reader.result;
+			// 	};
+			// 	// Not entirely sure how this function works in conjuction with the previous assignment :S
+			// 	lclImg = reader.readAsDataURL(imgFile);
+			// };
 			$('#agree').on('click', function(e){
 				name = $('input[type=text]').val();
 
 				if (name.length == 0){
-					
+
 					e.preventDefault();
 					$('#error').css({"display": "block", "color": "red", "font-family": "Source Code Pro"}).text("Please provide a username then continue");
 
@@ -35,8 +53,6 @@ $(document).ready(function(){
 						lclImg = reader.readAsDataURL(imgFile);
 					};
 
-					
-					// debugger
 					var socket = io();
 					$('form').submit(function(){
 						socket.emit('chat message', $('#chat').val());
@@ -63,6 +79,10 @@ $(document).ready(function(){
 			});
 		}
 	});
+
+
+	
+
 });
 
 

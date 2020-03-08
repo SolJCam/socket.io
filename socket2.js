@@ -20,4 +20,6 @@ io.on('connection', function(socket){
 	})
 });
 
+// https://bucket.mn2s.com/wp-content/uploads/2017/12/29105252/Pele-MN2S-.png
+
 http.listen(process.env.PORT || 3000);
