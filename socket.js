@@ -17,22 +17,18 @@ const users = {}
 io.on('connection', function (socket) {
 	socket.on('joining chat', member => {
 		users[socket.id] = member;
-		console.log(users);
 		socket.broadcast.emit('connnected to chat', member)
 	})
 
 	socket.on('sent chat message', function (msg) {
 		const member = users[socket.id]
-		console.log(member);
 		socket.broadcast.emit('send my chat message', [member, msg])
 		socket.emit('display my chat message', [member, msg])
-		// io.emit('post chat message', [member, msg])
 	});
 
 	socket.on('disconnect', () => {
 		socket.broadcast.emit('user-disconnected', users[socket.id]);
 		delete users[socket.id];
-		console.log(users);
 	})
 });
 
