@@ -4,7 +4,9 @@ $(document).ready(function(){
 
 	window.socket = io();
 	
+	window.extImg = ""
 	window.lclImg = ""
+	window.Id = ""
 	window.member = {}
 	
 	$('#modal1').openModal({
@@ -20,13 +22,14 @@ $(document).ready(function(){
 
 				} else {
 					// Catching, if passed, the external url value for user image
-					const extImg = $('input[type=url]').val();
+					extImg = $('input[type=url]').val();
 								
 					// Accessing, if provided, local file objects representing the image files selected by the user : https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications
 					const imgFile = $('input[type=file]')[0].files[0];
 					
 					// creating url for local images
 					if(imgFile){
+						Id = socket.id
 						reader = new FileReader();
 						reader.onloadend = function () {
 							// Necessary for function to follow though not clear why
@@ -36,21 +39,20 @@ $(document).ready(function(){
 						lclImg = reader.readAsDataURL(imgFile);	
 					};
 					
-					if (imgFile) {
-						sessionStorage.setItem('id', socket.id);
-						member = {
-							"name": name,
-							"pic": socket.id
-						}
-					} else if (extImg) {
+					if (extImg) {
 						member = {
 							"name": name,
 							"pic": extImg
 						}					
+					} else if (imgFile) {
+						member = {
+							"name": name,
+							"pic": Id
+						}
 					} else {
 						member = {
 							"name": name,
-							"pic": null
+							"pic": "no image"
 						}
 					}
 					
@@ -69,14 +71,13 @@ $(document).ready(function(){
 		const name = userMsg[0]["name"];	
 		const msg = userMsg[1];
 		const pic = userMsg[0]["pic"]
-		const picId = sessionStorage.getItem('id')
-			
-		if (pic != picId) {
-			$('#messages').append($('<li>').append($('<img>').attr({'src': pic, 'width': 50, 'height': 20})).append(name).css("color", "red"));
-		} else if (pic == picId) {
+		
+		if (pic == extImg) {
+			$('#messages').append($('<li>').append($('<img>').attr({'src': extImg, 'width': 50, 'height': 20})).append(name).css("color", "red"));
+		} else if (pic == Id) {
 			$('#messages').append($('<li>').append($('<img>').attr({'src': lclImg, 'id': picId, 'width': 50, 'height': 20})).append(name).css("color", "red"));
 		} else {
-			$('#messages').append($('<li>').append($('<img>').attr({'src': '/noPic.jpg', 'width': 50, 'height': 20})).append(name).css("color", "red"));
+			$('#messages').append($('<li>').append($('<img>').attr({'src': '/images/noPic.jpg', 'width': 50, 'height': 20})).append(name).css("color", "red"));
 		}
 		$('#messages').append($('<li>').text(msg));
 		$('#mine').scrollTop($('#messages').height());
