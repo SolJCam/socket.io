@@ -8,7 +8,7 @@ $(document).ready(function(){
 	window.lclImg = ""
 	window.Id = ""
 	window.member = {}
-	
+	// modal reload bug doesn't happen on url '/?#!'
 	$('#modal1').openModal({
 		dismissible: false,
 		ready: function(){

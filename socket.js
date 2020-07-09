@@ -12,6 +12,7 @@ app.get('/', function (req, res) {
 	});
 });
 
+const trial = ""
 const users = {}
 
 io.on('connection', function (socket) {
