@@ -12,7 +12,7 @@ app.get('/', function (req, res) {
 	});
 });
 
-const trial = ""
+// const trial = ""		// not sure why this variable was created. Slated for removal
 const users = {}
 
 io.on('connection', function (socket) {
