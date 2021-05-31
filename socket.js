@@ -12,7 +12,7 @@ app.get('/', function (req, res) {
 	});
 });
 
-// const trial = ""		// not sure why this variable was created. Slated for removal
+const trial = ""		// not sure why this variable was created. Slated for removal
 const users = {}
 
 io.on('connection', function (socket) {
