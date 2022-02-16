@@ -99,7 +99,6 @@ $(document).ready(function(){
 	});
 
 	socket.on('display my chat message', userMsg => {
-		debugger
 		appendMessage(userMsg);
 	});
 
