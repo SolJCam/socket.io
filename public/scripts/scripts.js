@@ -71,11 +71,11 @@ $(document).ready(function(){
 		const name = userMsg[0]["name"];	
 		const msg = userMsg[1];
 		const pic = userMsg[0]["pic"]
-		
+
 		if (pic == extImg) {
 			$('#messages').append($('<li>').append($('<img>').attr({'src': extImg, 'width': 50, 'height': 20})).append(name).css("color", "red"));
 		} else if (pic == Id) {
-			$('#messages').append($('<li>').append($('<img>').attr({'src': lclImg, 'id': picId, 'width': 50, 'height': 20})).append(name).css("color", "red"));
+			$('#messages').append($('<li>').append($('<img>').attr({'src': lclImg, 'id': Id, 'width': 50, 'height': 20})).append(name).css("color", "red"));
 		} else {
 			$('#messages').append($('<li>').append($('<img>').attr({'src': '/images/noPic.jpg', 'width': 50, 'height': 20})).append(name).css("color", "red"));
 		}
@@ -99,6 +99,7 @@ $(document).ready(function(){
 	});
 
 	socket.on('display my chat message', userMsg => {
+		debugger
 		appendMessage(userMsg);
 	});
 
